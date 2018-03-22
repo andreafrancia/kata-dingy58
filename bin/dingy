@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+require_relative '../lib/dingy'
+now = ENV['NOW'] || Time.now.to_s
+if ARGV.first == '--start'
+  require 'time'
+  File.write('next_alarm.txt', Time.parse(now)+25*60)
+else
+  ring_time = File.read('next_alarm.txt')
+  puts format_remaining_time(now, ring_time)
+end
